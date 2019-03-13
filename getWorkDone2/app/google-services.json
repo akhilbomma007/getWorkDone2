@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "9560561415",
+    "firebase_url": "https://get-work-done-4e1bc.firebaseio.com",
+    "project_id": "get-work-done-4e1bc",
+    "storage_bucket": "get-work-done-4e1bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9560561415:android:e1c7baeb718029ff",
+        "android_client_info": {
+          "package_name": "com.example.getworkdone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9560561415-0rsrabtd474a5ijqbpmgd2ematdns2m6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.getworkdone",
+            "certificate_hash": "c77c1640e849aebf6542bb1c1f4ea3a644ef7985"
+          }
+        },
+        {
+          "client_id": "9560561415-1eiad3q0g4qejp1r0h9676tavobn1thq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPPdnLIGcHveDn2CgHZniWpd7I0y4Zick"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9560561415-1eiad3q0g4qejp1r0h9676tavobn1thq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

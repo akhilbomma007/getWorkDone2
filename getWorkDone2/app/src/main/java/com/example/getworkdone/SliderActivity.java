@@ -98,12 +98,12 @@ public class SliderActivity extends AppCompatActivity {
                 back.setVisibility(View.VISIBLE);
                 next.setText("Finish");
                 back.setText("Back");
-//                next.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        startActivity(new Intent(SliderActivity.this,LoginActivity.class));
-//                    }
-//                });
+                next.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(SliderActivity.this,LoginActivity.class));
+                    }
+                });
             }else{
                 next.setEnabled(true);
                 back.setEnabled(true);
