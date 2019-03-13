@@ -1,5 +1,6 @@
 package com.example.getworkdone;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -29,12 +30,12 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class LoginActivity extends AppCompatActivity {
 
 
-    private Button signOut;
     private SignInButton signInButton;
     private int RC_SIGN_IN = 1;
     private GoogleSignInClient mGoogleSignInClient;
     private String TAG = "SignIn Activity";
     private FirebaseAuth mAuth;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -46,9 +47,9 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        signInButton = (SignInButton)findViewById(R.id.googleSignInButton);
-        signOut = (Button)findViewById(R.id.signOutBtn);
+        signInButton = (SignInButton)findViewById(R.id.googleSignInButton );
         mAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -62,29 +63,23 @@ public class LoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.setMessage("Please wait!");
+                progressDialog.show();
                 signIn();
-                //signOut.setVisibility(View.GONE);
-            }
-        });
-
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(LoginActivity.this,"sign out Successful",Toast.LENGTH_SHORT).show();
-                mAuth.signOut();
-                signOut.setEnabled(false);
-                signOut.setVisibility(View.INVISIBLE);
             }
         });
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 //        updateUI(currentUser);
-//    }
+
+        if(currentUser!=null)
+            startActivity(new Intent(this,HomeActivity.class));
+    }
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -112,7 +107,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -120,14 +114,18 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            progressDialog.dismiss();
                             Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+//                            FirebaseUser user = mAuth.getCurrentUser();
+//                            updateUI(user);
+                            finish();
+                            startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
+                            progressDialog.dismiss();
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(LoginActivity.this,"not able to login",Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                            //updateUI(null);
                         }
 
                         // ...
@@ -135,21 +133,18 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    public void updateUI(FirebaseUser user){
-
-        signOut.setEnabled(true);
-        signOut.setVisibility(View.VISIBLE);
-
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext() );
-        if (acct != null) {
-            String personName = acct.getDisplayName();
-            String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
-            Uri personPhoto = acct.getPhotoUrl();
-
-            Toast.makeText(this,"Name of the user : " + personName + "user id is : " + personId,Toast.LENGTH_LONG).show();
-        }
-    }
+//    public void updateUI(FirebaseUser user){
+//
+//        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext() );
+//        if (acct != null) {
+//            String personName = acct.getDisplayName();
+//            String personGivenName = acct.getGivenName();
+//            String personFamilyName = acct.getFamilyName();
+//            String personEmail = acct.getEmail();
+//            String personId = acct.getId();
+//            Uri personPhoto = acct.getPhotoUrl();
+//
+//            Toast.makeText(this,"Name of the user : " + personName + "user id is : " + personId,Toast.LENGTH_LONG).show();
+//        }
+//    }
 }

@@ -107,6 +107,7 @@ public class SliderActivity extends AppCompatActivity {
                 next.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        finish();
                         startActivity(new Intent(SliderActivity.this,LoginActivity.class));
                     }
                 });
