@@ -142,13 +142,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/green"
                 android:text="₹"
                 android:textSize="15dp"/>
 
             <TextView
                 android:id="@+id/pay"
                 android:textSize="15sp"
-                android:paddingLeft="6dp"
                 style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_below="@id/deadline"
                 android:textColor="@color/green"
