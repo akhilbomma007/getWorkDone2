@@ -34,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         final HomeFragment homeFragment = new HomeFragment();
         final NotificationFragment notificationFragment = new NotificationFragment();
         final SettingsFragment settingsFragment = new SettingsFragment();
+        final UploadFragment uploadFragment = new UploadFragment();
 
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -42,6 +43,9 @@ public class HomeActivity extends AppCompatActivity {
                 if(id == R.id.home) {
                     setFragment(homeFragment);
                     return true;
+                }
+                else if(id == R.id.upload){
+                    setFragment(uploadFragment);
                 }
                 else if(id == R.id.notification) {
                     setFragment(notificationFragment);

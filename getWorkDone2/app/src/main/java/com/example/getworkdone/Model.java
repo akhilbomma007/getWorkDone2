@@ -1,12 +1,11 @@
 package com.example.getworkdone;
 
 public class Model {
-    private String work,college,field,deadline,image;
-    private long pay;
+    private String work,college,field,deadline,image,pay;
 
     public Model(){}
 
-    public Model(String work, String college, String field, long pay, String deadline, String image) {
+    public Model(String work, String college, String field, String pay, String deadline, String image) {
         this.work = work;
         this.college = college;
         this.field = field;
@@ -40,9 +39,9 @@ public class Model {
     }
 
     public String getPay() {
-        return Long.toString(pay);
+        return pay;
     }
-    public void setPay(long pay) {
+    public void setPay(String pay) {
         this.pay = pay;
     }
 
